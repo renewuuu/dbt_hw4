@@ -1,0 +1,35 @@
+name: dbt_hw4
+
+profile: dbt_hw4
+
+seed-paths: ["seeds"]
+model-paths: ["models"]
+macro-paths: ["macros"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+seeds:
+  dbt_hw4:
+    +schema: raw
+
+models:
+  dbt_hw4:
+    +static_analysis: strict
+
+    staging:
+      +materialized: view
+      +schema: staging
+
+    marts:
+      +materialized: table
+      +schema: marts
+
+    transform:
+      +materialized: view
+      +schema: transform
+
+    analytics:
+      +materialized: table
+      +schema: analytics
